@@ -40,8 +40,8 @@ const Countries = () => {
   useEffect(() => {
     fetch(API_URL)
       .then((res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP status ${res.status}`);
+        if (res.ok) {
+          console.log("Fetching Succesful");
         }
         return res.json();
       })
@@ -93,7 +93,7 @@ const Countries = () => {
           <CountryCard
             key={country.cca3}
             name={country.name.common}
-            flag={country.flags.svg}
+            flag={country.flags.png}
           />
         ))}
       </div>
