@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 const CountryCard = (props) => {
   return (
     <div
+      className="countryCard"
       style={{
         display: "flex",
         flexDirection: "column",
@@ -38,22 +39,29 @@ const Countries = () => {
 
   useEffect(() => {
     fetch(API_URL)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP status ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => setCountries(data))
-      .catch((error) => console.log(error));
+      .catch((error) => console.error("API Error:", error));
   }, []);
 
   const handleSearch = (e) => {
-    setKeyword(e.target.value.toLowerCase());
+    const searchValue = e.target.value.toLowerCase();
+    setKeyword(searchValue);
 
     const filteredArray = countries.filter((country) =>
-      country.name.common.toLowerCase().includes(keyword)
+      country.name.common.toLowerCase().includes(searchValue)
     );
 
     setFilteredCountries(filteredArray);
   };
 
   const countriesToDisplay = keyword ? filteredCountries : countries;
+
   return (
     <div
       style={{
@@ -83,7 +91,7 @@ const Countries = () => {
       >
         {countriesToDisplay.map((country) => (
           <CountryCard
-            key={country.cca3} // Use a unique identifier like cca3
+            key={country.cca3}
             name={country.name.common}
             flag={country.flags.svg}
           />
