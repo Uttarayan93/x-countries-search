@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 const CountryCard = (props) => {
   return (
     <div
-      className="countryCard"
       style={{
         display: "flex",
         flexDirection: "column",
@@ -91,6 +90,7 @@ const Countries = () => {
       >
         {countriesToDisplay.map((country) => (
           <CountryCard
+            className="countryCard"
             key={country.cca3}
             name={country.name.common}
             flag={country.flags.png}
