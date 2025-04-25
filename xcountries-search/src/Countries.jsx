@@ -15,6 +15,7 @@ const CountryCard = (props) => {
         justifyContent: "center",
         textAlign: "center",
       }}
+      className="countryCard"
     >
       <img
         style={{
@@ -25,11 +26,8 @@ const CountryCard = (props) => {
         src={props.flag}
         alt={props.name}
       />
-      <p>
-        <h2>
-          <span>{props.name}</span>
-        </h2>
-      </p>
+
+      <h2>{props.name}</h2>
     </div>
   );
 };
