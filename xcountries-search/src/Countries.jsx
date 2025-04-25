@@ -31,19 +31,15 @@ const CountryCard = (props) => {
 };
 
 const Countries = () => {
-  const API_URL = "https://restcountries.com/v3.1/all";
+  const API_URL =
+    "https://countries-search-data-prod-812920491762.asia-south1.run.app/countries";
   const [countries, setCountries] = useState([]);
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
     fetch(API_URL)
-      .then((res) => {
-        if (res.ok) {
-          console.log("Fetching Succesful");
-        }
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => setCountries(data))
       .catch((error) => console.error("API Error:", error));
   }, []);
@@ -53,7 +49,7 @@ const Countries = () => {
     setKeyword(searchValue);
 
     const filteredArray = countries.filter((country) =>
-      country.name.common.toLowerCase().includes(searchValue)
+      country.common.toLowerCase().includes(searchValue)
     );
 
     setFilteredCountries(filteredArray);
@@ -91,9 +87,9 @@ const Countries = () => {
         {countriesToDisplay.map((country) => (
           <CountryCard
             className="countryCard"
-            key={country.cca3}
-            name={country.name.common}
-            flag={country.flags.png}
+            key={country.common}
+            name={country.common}
+            flag={country.png}
           />
         ))}
       </div>
