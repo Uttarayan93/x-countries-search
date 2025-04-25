@@ -25,7 +25,11 @@ const CountryCard = (props) => {
         src={props.flag}
         alt={props.name}
       />
-      <h4>{props.name}</h4>
+      <p>
+        <h2>
+          <span>{props.name}</span>
+        </h2>
+      </p>
     </div>
   );
 };
